@@ -1,0 +1,9 @@
+{
+    "env" : {
+        "MYSQL_USER" : "dyganar",
+        "MYSQL_PASSWORD" : "takanar",
+        "MYSQL_DATABASE" : "ecommerce",
+        "MYSQL_HOST" : "172.31.202.10",
+        "MYSQL_PORT" : 3306
+    }
+}

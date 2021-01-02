@@ -6,13 +6,13 @@
 5. CORS errors site acesse outro site com algumas restrições
 */
 
-const express = require('express')
-const app = express()
+const express = require('express')  //estrutura
+const app = express()               //estrutura
 const morgan = require('morgan') //log
 const bodyParser = require('body-parser') //corpo das requisições
 
-const rotaProdutos = require('./routes/produtos')
-const rotaPedidos = require('./routes/pedidos')
+const rotaProdutos = require('./routes/produtos')  //rotas
+const rotaPedidos = require('./routes/pedidos')   //rotas
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: false}))
@@ -31,16 +31,16 @@ app.use((request, response, next) => {
     }
     next()
 })
-app.use('/produtos', rotaProdutos)
-app.use('/pedidos', rotaPedidos)
+app.use('/produtos', rotaProdutos)  //rotas
+app.use('/pedidos', rotaPedidos)    //rotas
 
-app.use((request, response, next) => {
+app.use((request, response, next) => {   //estrutura
     const erro = new Error("Não encontrado")
     erro.status = 404
     next(erro)
 })
 
-app.use((error, request, response, next) => {
+app.use((error, request, response, next) => { //estrutura
     response.status(error.status || 500)
     return response.send({
         erro: {
@@ -49,4 +49,4 @@ app.use((error, request, response, next) => {
     })
 })
 
-module.exports = app
+module.exports = app   //estrutura
