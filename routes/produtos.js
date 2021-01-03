@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('../mysql').pool
+const login = require('../middleware/login')
 
 router.get('/', (request, response, next) => {
     mysql.getConnection((error, conn) => {
@@ -45,7 +46,7 @@ router.get('/', (request, response, next) => {
     
 })
 
-router.post('/', (request, response, next) => {
+router.post('/', login, (request, response, next) => {
     
     /*const produto = {
         nome: request.body.nome,
@@ -157,7 +158,7 @@ router.get('/:id_produto', (request, response, next) => {
     
 })
 
-router.patch('/', (request, response, next) => {
+router.patch('/', login, (request, response, next) => {
     const id = request.body.id_produto
     const nome = request.body.nome
     const preco = request.body.preco
@@ -201,7 +202,7 @@ router.patch('/', (request, response, next) => {
     })
 })
 
-router.delete('/', (request, response, next) => {
+router.delete('/', login, (request, response, next) => {
     const id = request.body.id_produto
     mysql.getConnection((error, conn) => {
         if(error){

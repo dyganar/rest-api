@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('../mysql').pool
+const login = require('../middleware/login')
 
 router.get('/', (request, response, next) => {
     mysql.getConnection((error, conn) => {
@@ -47,7 +48,7 @@ router.get('/', (request, response, next) => {
     })
 })
 
-router.post('/', (request, response, next) => {
+router.post('/', login, (request, response, next) => {
 
     /*const pedido = {
         id_pedido: request.body.id_pedido,

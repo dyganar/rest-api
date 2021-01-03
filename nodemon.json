@@ -3,7 +3,9 @@
         "MYSQL_USER" : "dyganar",
         "MYSQL_PASSWORD" : "takanar",
         "MYSQL_DATABASE" : "ecommerce",
-        "MYSQL_HOST" : "172.31.202.10",
-        "MYSQL_PORT" : 3306
+        "MYSQL_HOST" : "172.31.207.5",
+        "MYSQL_PORT" : 3306,
+
+        "JWT_KEY": "segredo"
     }
 }

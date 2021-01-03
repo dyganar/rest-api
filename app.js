@@ -13,6 +13,7 @@ const bodyParser = require('body-parser') //corpo das requisições
 
 const rotaProdutos = require('./routes/produtos')  //rotas
 const rotaPedidos = require('./routes/pedidos')   //rotas
+const rotaUsuarios = require('./routes/usuarios')
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: false}))
@@ -33,6 +34,7 @@ app.use((request, response, next) => {
 })
 app.use('/produtos', rotaProdutos)  //rotas
 app.use('/pedidos', rotaPedidos)    //rotas
+app.use('/usuarios', rotaUsuarios)
 
 app.use((request, response, next) => {   //estrutura
     const erro = new Error("Não encontrado")
