@@ -1,5 +1,4 @@
-const mysql = require('mysql')
-
+const mysql = require('../mysql').pool
 
 exports.getPedidos = (request, response, next) => {
     mysql.getConnection((error, conn) => {
@@ -32,7 +31,7 @@ exports.getPedidos = (request, response, next) => {
                             request: {
                                 tipo: 'GET',
                                 descricao: 'Retorna detalhes do pedido',
-                                url: 'http://'+'10.0.0.107:3000'+'/pedidos/'+prod.id_pedido
+                                url: process.env.API_URL+'/pedidos/'+prod.id_pedido
                             }
                         }
                     })
@@ -96,7 +95,7 @@ exports.postPedidos = (request, response, next) => {
                             request: {
                                 tipo: 'GET',
                                 descricao: 'Retorna todos os pedidos',
-                                url: 'http://'+'10.0.0.107:3000'+'/pedidos'
+                                url: process.env.API_URL+'/pedidos'
                             }
                         }
                     }
@@ -143,7 +142,7 @@ exports.getPedidosEspecificos = (request, response, next) => {
                             request: {
                                 tipo: 'GET',
                                 descricao: 'Retorna todos os pedidos',
-                                url: 'http://'+'10.0.0.107:3000'+'/pedidos'
+                                url: process.env.API_URL+'/pedidos'
                             }
                         }
                     }
@@ -195,7 +194,7 @@ exports.patchPedidos = (request, response, next) => {
                         request: {
                             tipo: 'GET',
                             descricao: 'Retorna detalhes do pedido',
-                            url: 'http://'+'10.0.0.107:3000'+'/pedidos/'+request.body.id_pedido
+                            url: process.env.API_URL+'/pedidos/'+request.body.id_pedido
                         }
                     }
                 }
@@ -238,7 +237,7 @@ exports.deletePedidos = (request, response, next) => {
                         request: {
                             tipo: 'POST',
                             descricao: 'Insere um pedido',
-                            url: 'http://localhost:3000/pedidos',
+                            url: process.env.API_URL+'/pedidos',
                             body: {
                                 id_produto: 'number',
                                 quantidade: 'number'
