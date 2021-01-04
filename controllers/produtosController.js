@@ -21,7 +21,6 @@ exports.getProdutos = (request, response, next) => {
                 const res = {
                     quantidade: result.length,
                     produtos: result.map(prod => {
-                        console.log(prod)
                         return {
                             id_produto: prod.id_produto,
                             nome: prod.nome,

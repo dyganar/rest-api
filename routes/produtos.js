@@ -13,4 +13,5 @@ router.get('/:id_produto', produtosController.getProdutoEspecifico)
 router.patch('/', login, produtosController.patchProdutos)
 
 router.delete('/', login, produtosController.deleteProdutos)
+
 module.exports = router
