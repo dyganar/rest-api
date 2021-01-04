@@ -21,10 +21,12 @@ exports.getProdutos = (request, response, next) => {
                 const res = {
                     quantidade: result.length,
                     produtos: result.map(prod => {
+                        console.log(prod)
                         return {
                             id_produto: prod.id_produto,
                             nome: prod.nome,
                             preco: prod.preco,
+                            imagem_produto: prod.imagem_produto,
                             request: {
                                 tipo: 'GET',
                                 descricao: 'Retorna detalhes do produto',
@@ -44,15 +46,8 @@ exports.getProdutos = (request, response, next) => {
 }
 
 exports.postProdutos = (request, response, next) => {
+    console.log(request.file)
     
-    /*const produto = {
-        nome: request.body.nome,
-        preco: request.body.preco
-    }
-    response.status(201).send({
-        mensagem: 'produto inserido com sucesso',
-        id_produto: produto
-    })*/
     mysql.getConnection((error, conn) => {
         if(error){
             return response.status(500).send({
@@ -61,8 +56,8 @@ exports.postProdutos = (request, response, next) => {
             })
         }
         conn.query(
-            'INSERT INTO produtos (nome, preco) VALUES (?,?)',
-            [request.body.nome, request.body.preco],
+            'INSERT INTO produtos (nome, preco, imagem_produto) VALUES (?,?,?)',
+            [request.body.nome, request.body.preco, request.file.path],
             (error, result, field) => {
                 if(error){
                     conn.release()
@@ -77,10 +72,11 @@ exports.postProdutos = (request, response, next) => {
                         id_produto: result.id_produto,
                         nome: request.body.nome,
                         preco: request.body.preco,
+                        produtoImagem: request.file.path,
                         request: {
                             tipo: 'GET',
                             descricao: 'Retorna todos os produtos',
-                            url: 'http://'+'10.0.0.107:3000'+'/produtos'
+                            url: 'http://'+'10.0.0.111:3000'+'/produtos'
                         }
                     }
                 }
@@ -120,6 +116,7 @@ exports.getProdutoEspecifico = (request, response, next) => {
                             id_produto: result[0].id_produto,
                             nome: result[0].nome,
                             preco: result[0].preco,
+                            imagem_produto: result[0].imagem_produto,
                             request: {
                                 tipo: 'GET',
                                 descricao: 'Retorna todos os produtos',

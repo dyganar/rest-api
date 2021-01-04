@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router()
 const login = require('../middleware/login')
 const produtosController = require('../controllers/produtosController')
+const uploadFotos = require('../uploadFotos')
 
 router.get('/', produtosController.getProdutos)
 
-router.post('/', login, produtosController.postProdutos)
+router.post('/', login, uploadFotos.upload.single('produtoImagem'), produtosController.postProdutos)
 
 router.get('/:id_produto', produtosController.getProdutoEspecifico)
 
